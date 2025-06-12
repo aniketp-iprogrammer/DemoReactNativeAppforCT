@@ -9,6 +9,12 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
+// CleverTap imports
+import com.clevertap.react.CleverTapPackage;
+import com.clevertap.react.CleverTapRnAPI;
+import com.clevertap.android.sdk.ActivityLifecycleCallback;
+import com.clevertap.android.sdk.CleverTapAPI;
+import com.clevertap.android.sdk.CleverTapAPI.LogLevel;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -51,6 +57,9 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public void onCreate() {
+        CleverTapAPI.setDebugLevel(LogLevel.VERBOSE);
+        ActivityLifecycleCallback.register(this);
+        CleverTapRnAPI.initReactNativeIntegration(this);
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
